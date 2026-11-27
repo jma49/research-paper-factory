@@ -24,8 +24,8 @@ def generate_disclosure_tex(ai_usage_md: Path, out_tex: Path) -> Dict[str, int]:
             })
     models = sorted({r["model"] for r in rows})
     roles = sorted({r["role"] for r in rows})
-    model_str = ", ".join(m.replace("_", r"\_") for m in models) if models else "None"
-    role_str = ", ".join(r.replace("_", r"\_") for r in roles) if roles else "None"
+    model_str = ", ".join(m.replace("_", r"\_").replace("&", r"\&") for m in models) if models else "None"
+    role_str = ", ".join(r.replace("_", r"\_").replace("&", r"\&") for r in roles) if roles else "None"
 
     tex = (
         "% AUTO-GENERATED FROM AI_USAGE.md — DO NOT EDIT BY HAND\n"
