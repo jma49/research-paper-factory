@@ -48,6 +48,7 @@ def fetch_crossref_doi(doi: str) -> Optional[Dict[str, Any]]:
                 break
         venue = (m.get("container-title") or [""])[0]
         title = (m.get("title") or [""])[0]
+        title = re.sub(r"<[^>]+>", "", title)
         item_type = m.get("type", "")
         entry_type = "article" if "journal" in item_type else ("inproceedings" if "proceedings" in item_type else "misc")
         return {
